@@ -1,0 +1,4 @@
+[submodule "sloop"]
+	path = sloop
+	url = https://github.com/ovalenti/sloop.git
+	branch = master

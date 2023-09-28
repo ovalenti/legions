@@ -1,0 +1,23 @@
+#define LWIP_DEBUG 1
+
+#define NO_SYS 1
+
+#define SYS_LIGHTWEIGHT_PROT 0
+
+#define LWIP_TIMERS_CUSTOM 1
+
+#define MEM_LIBC_MALLOC 1
+#define MEMP_MEM_MALLOC 1
+
+#define MEM_ALIGNMENT 8
+
+#define LWIP_ARP 0
+
+#define LWIP_UDP 0
+
+#define LWIP_MSS 1500
+
+#define LWIP_LISTEN_BACKLOG 0
+
+#define LWIP_SOCKET 0
+#define LWIP_NETCONN 0
