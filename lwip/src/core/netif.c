@@ -395,35 +395,9 @@ netif_add(struct netif *netif,
 #endif /* LWIP_IPV6 && LWIP_ND6_ALLOW_RA_UPDATES */
 
 #if !LWIP_SINGLE_NETIF
-  /* Assign a unique netif number in the range [0..254], so that (num+1) can
-     serve as an interface index that fits in a u8_t.
-     We assume that the new netif has not yet been added to the list here.
-     This algorithm is O(n^2), but that should be OK for lwIP.
-     */
-  {
-    struct netif *netif2;
-    int num_netifs;
-    do {
-      if (netif->num == 255) {
-        netif->num = 0;
-      }
-      num_netifs = 0;
-      for (netif2 = netif_list; netif2 != NULL; netif2 = netif2->next) {
-        LWIP_ASSERT("netif already added", netif2 != netif);
-        num_netifs++;
-        LWIP_ASSERT("too many netifs, max. supported number is 255", num_netifs <= 255);
-        if (netif2->num == netif->num) {
-          netif->num++;
-          break;
-        }
-      }
-    } while (netif2 != NULL);
-  }
-  if (netif->num == 254) {
-    netif_num = 0;
-  } else {
-    netif_num = (u8_t)(netif->num + 1);
-  }
+  static int netif_next_num = 1;
+
+  netif->num = netif_next_num++;
 
   /* add this netif to the list */
   netif->next = netif_list;
