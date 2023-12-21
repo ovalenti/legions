@@ -17,3 +17,6 @@ target_include_directories(legions PRIVATE ${LWIP_INCLUDE_DIRS})
 
 target_link_libraries(legions sloop lwipcore)
 
+add_executable(generator generator.c)
+
+target_link_libraries(generator sloop)
